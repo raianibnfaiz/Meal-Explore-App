@@ -1,35 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:mealexplore/models/category.dart';
 
-class CategoryGridItem extends StatefulWidget {
-  const CategoryGridItem({super.key, required this.category});
+class CategoryGridItem extends StatelessWidget {
+  const CategoryGridItem(
+      {super.key, required this.category, required this.onSelectCategory});
+
   final Category category;
+  final void Function() onSelectCategory;
 
-  @override
-  State<CategoryGridItem> createState() => _CategoryGridItemState();
-}
 
-class _CategoryGridItemState extends State<CategoryGridItem> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
-      splashColor: Theme.of(context).primaryColor,
+      onTap: onSelectCategory,
+      splashColor: Theme
+          .of(context)
+          .primaryColor,
       child: Container(
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          gradient: LinearGradient(colors: [
-            widget.category.color.withOpacity(0.7),
-            widget.category.color
-          ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+            borderRadius: BorderRadius.circular(16),
+            gradient: LinearGradient(
+              colors: [
+                category.color.withOpacity(0.55),
+                category.color.withOpacity(0.9),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            )),
+        child: Text(
+          category.title,
+          style: Theme
+              .of(context)
+              .textTheme
+              .titleSmall!
+              .copyWith(
+            color: Theme
+                .of(context)
+                .colorScheme
+                .onBackground,
+          ),
         ),
-        child: Center(
-            child: Text(
-          widget.category.title,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
-              ),
-        )),
       ),
     );
   }
