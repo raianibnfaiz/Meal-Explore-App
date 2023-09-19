@@ -34,7 +34,7 @@ class _TabsScreenState extends State<TabsScreen> {
     Widget activePage =  CategoriesScreen(onToggleFavorite: _toggleMealFavoriteStatus,);
     var activeTitle = "Categories";
     if(_selectedPageIndex == 1){
-      activePage =  MealsScreen( meals: [], onToggleFavorite: _toggleMealFavoriteStatus,);
+      activePage =  MealsScreen( meals: _favoriteMeals, onToggleFavorite: _toggleMealFavoriteStatus,);
       activeTitle = "Your Favorites";
     }
     return Scaffold(
